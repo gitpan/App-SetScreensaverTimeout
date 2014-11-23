@@ -1,0 +1,139 @@
+#!perl
+
+# Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/set_screensaver_timeout
+# and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
+
+our $DATE = '2014-11-23'; # DATE
+our $VERSION = '0.01'; # VERSION
+
+use 5.010001;
+use strict;
+use warnings;
+
+use Perinci::CmdLine::Any -prefer_lite=>1;
+
+Perinci::CmdLine::Any->new(
+    url => "/App/SetScreensaverTimeout/set_screensaver_timeout",
+)->run;
+
+# ABSTRACT: Set screensaver timeout
+# PODNAME: set-screensaver-timeout
+
+__END__
+
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+set-screensaver-timeout - Set screensaver timeout
+
+=head1 VERSION
+
+This document describes version 0.01 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-23.
+
+=head1 SYNOPSIS
+
+ % set-screensaver-timeout [options] <timeout>
+
+=head1 DESCRIPTION
+
+Provide a common way to quickly set screensaver timeout from command-line.
+Support xscreensaver, gnome-screensaver, and KDE screen locker. Support for
+other screensavers will be added in the future.
+
+=head1 OPTIONS
+
+C<*> marks required options.
+
+=head2 Common options
+
+=over
+
+=item B<--config-path>=I<s>
+
+Set path to configuration file.
+
+=item B<--config-profile>=I<s>
+
+Set configuration profile to use.
+
+=item B<--format>=I<s>
+
+Set output format.
+
+=item B<--help>, B<-h>, B<-?>
+
+Show help message.
+
+=item B<--json>
+
+Set output format to json.
+
+=item B<--no-config>
+
+Do not use any configuration file.
+
+=item B<--version>, B<-v>
+
+Show program version.
+
+=back
+
+=head2 Options
+
+=over
+
+=item B<--timeout>=I<s>*
+
+Value, default in minutes.
+
+=back
+
+=head1 FILES
+
+B</etc/set-screensaver-timeout.conf>
+
+B<~/set-screensaver-timeout.conf>
+
+=head1 BASH COMPLETION
+
+This script has bash completion capability.
+
+To activate bash completion for this script, put:
+
+ complete -C set-screensaver-timeout set-screensaver-timeout
+
+in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
+
+You can also install L<App::BashCompletionProg> which makes it easy to add completion for Perinci::CmdLine-based scripts. After you install the module and put C<. ~/.bash-complete-prog> (or C<. /etc/bash-complete-prog>), you can just run C<bash-completion-prog> and the C<complete> command will be added to your C<~/.bash-completion-prog>. Your next shell session will then recognize tab completion for the command.
+
+=head1 HOMEPAGE
+
+Please visit the project's homepage at L<https://metacpan.org/release/App-SetScreensaverTimeout>.
+
+=head1 SOURCE
+
+Source repository is at L<https://github.com/perlancar/perl-App-SetScreensaverTimeout>.
+
+=head1 BUGS
+
+Please report any bugs or feature requests on the bugtracker website L<https://rt.cpan.org/Public/Dist/Display.html?Name=App-SetScreensaverTimeout>
+
+When submitting a bug or request, please include a test-file or a
+patch to an existing test-file that illustrates the bug or desired
+feature.
+
+=head1 AUTHOR
+
+perlancar <perlancar@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2014 by perlancar@cpan.org.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut

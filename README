@@ -1,0 +1,59 @@
+NAME
+    App::SetScreensaverTimeout - Set screensaver timeout
+
+VERSION
+    This document describes version 0.01 of App::SetScreensaverTimeout (from
+    Perl distribution App-SetScreensaverTimeout), released on 2014-11-23.
+
+FUNCTIONS
+  set_screensaver_timeout(%args) -> [status, msg, result, meta]
+    Set screensaver timeout.
+
+    Provide a common way to quickly set screensaver timeout from
+    command-line. Support xscreensaver, gnome-screensaver, and KDE screen
+    locker. Support for other screensavers will be added in the future.
+
+    Arguments ('*' denotes required arguments):
+
+    *   timeout* => *str*
+
+        Value, default in minutes.
+
+    Return value:
+
+    Returns an enveloped result (an array).
+
+    First element (status) is an integer containing HTTP status code (200
+    means OK, 4xx caller error, 5xx function error). Second element (msg) is
+    a string containing error message, or 'OK' if status is 200. Third
+    element (result) is optional, the actual result. Fourth element (meta)
+    is called result metadata and is optional, a hash that contains extra
+    information.
+
+     (any)
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/App-SetScreensaverTimeout>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/perlancar/perl-App-SetScreensaverTimeout>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=App-SetScreensaverTim
+    eout>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    perlancar <perlancar@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by perlancar@cpan.org.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
