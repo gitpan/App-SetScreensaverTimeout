@@ -1,7 +1,7 @@
 package App::SetScreensaverTimeout;
 
 our $DATE = '2014-11-23'; # DATE
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 use 5.010001;
 use strict;
@@ -46,7 +46,7 @@ sub set_screensaver_timeout {
 
     my $detres = detect_desktop();
 
-    if ($detres->{desktop} eq 'kde') {
+    if ($detres->{desktop} eq 'kde-plasma') {
         my $path = "$ENV{HOME}/.kde/share/config/kscreensaverrc";
         my $ct = read_file($path);
         my $secs = $mins*60;
@@ -98,7 +98,7 @@ App::SetScreensaverTimeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.01 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-23.
+This document describes version 0.02 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-23.
 
 =head1 FUNCTIONS
 
