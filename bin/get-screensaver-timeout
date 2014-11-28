@@ -1,6 +1,6 @@
 #!perl
 
-# Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/set_screensaver_timeout
+# Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/get_screensaver_timeout
 # and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
 
 our $DATE = '2014-11-28'; # DATE
@@ -13,11 +13,11 @@ use warnings;
 use Perinci::CmdLine::Any -prefer_lite=>1;
 
 Perinci::CmdLine::Any->new(
-    url => "/App/SetScreensaverTimeout/set_screensaver_timeout",
+    url => "/App/SetScreensaverTimeout/get_screensaver_timeout",
 )->run;
 
-# ABSTRACT: Set screensaver timeout
-# PODNAME: set-screensaver-timeout
+# ABSTRACT: Get screensaver timeout
+# PODNAME: get-screensaver-timeout
 
 __END__
 
@@ -27,27 +27,24 @@ __END__
 
 =head1 NAME
 
-set-screensaver-timeout - Set screensaver timeout
+get-screensaver-timeout - Get screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.03 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-28.
+This document describes version 0.03 of get-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-28.
 
 =head1 SYNOPSIS
 
- % set-screensaver-timeout [options] <timeout>
+ % get-screensaver-timeout [options]
 
 =head1 DESCRIPTION
 
-Provide a common way to quickly set screensaver timeout. Support xscreensaver,
-gnome-screensaver, and KDE screen locker. Support for other screensavers will be
-added in the future.
+Provide a common way to get screensaver timeout setting. Support several screen
+savers (see C<set_screensaver_timeout>).
 
 =head1 OPTIONS
 
 C<*> marks required options.
-
-=head2 Common options
 
 =over
 
@@ -81,21 +78,11 @@ Show program version.
 
 =back
 
-=head2 Options
-
-=over
-
-=item B<--timeout>=I<s>*
-
-Value, default in minutes.
-
-=back
-
 =head1 FILES
 
-B</etc/set-screensaver-timeout.conf>
+B</etc/get-screensaver-timeout.conf>
 
-B<~/set-screensaver-timeout.conf>
+B<~/get-screensaver-timeout.conf>
 
 =head1 COMPLETION
 
@@ -105,7 +92,7 @@ This script has shell tab completion capability with support for several shells.
 
 To activate bash completion for this script, put:
 
- complete -C set-screensaver-timeout set-screensaver-timeout
+ complete -C get-screensaver-timeout get-screensaver-timeout
 
 in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
@@ -115,7 +102,7 @@ You can also install L<App::BashCompletionProg> which makes it easy to add compl
 
 To activate tcsh completion for this script, put:
 
- complete set-screensaver-timeout 'p/*/`set-screensaver-timeout`/'
+ complete get-screensaver-timeout 'p/*/`get-screensaver-timeout`/'
 
 in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
@@ -123,9 +110,9 @@ in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then reco
 
 To activate zsh completion for this script, put:
 
- _set_screensaver_timeout() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_LINE="$cl" COMP_POINT="$cp" set-screensaver-timeout`) }
+ _get_screensaver_timeout() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_LINE="$cl" COMP_POINT="$cp" get-screensaver-timeout`) }
 
- compctl -K _set_screensaver_timeout set-screensaver-timeout
+ compctl -K _get_screensaver_timeout get-screensaver-timeout
 
 in your zsh startup (e.g. C<~/.zshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
