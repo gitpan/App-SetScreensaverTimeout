@@ -3,8 +3,8 @@
 # Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/get_screensaver_timeout
 # and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
 
-our $DATE = '2014-11-28'; # DATE
-our $VERSION = '0.03'; # VERSION
+our $DATE = '2014-11-30'; # DATE
+our $VERSION = '0.04'; # VERSION
 
 use 5.010001;
 use strict;
@@ -16,7 +16,7 @@ Perinci::CmdLine::Any->new(
     url => "/App/SetScreensaverTimeout/get_screensaver_timeout",
 )->run;
 
-# ABSTRACT: Get screensaver timeout
+# ABSTRACT: Get screensaver timeout (in minutes)
 # PODNAME: get-screensaver-timeout
 
 __END__
@@ -27,11 +27,11 @@ __END__
 
 =head1 NAME
 
-get-screensaver-timeout - Get screensaver timeout
+get-screensaver-timeout - Get screensaver timeout (in minutes)
 
 =head1 VERSION
 
-This document describes version 0.03 of get-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-28.
+This document describes version 0.04 of get-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
 
 =head1 SYNOPSIS
 
@@ -51,6 +51,8 @@ C<*> marks required options.
 =item B<--config-path>=I<s>
 
 Set path to configuration file.
+
+Can be specified multiple times.
 
 =item B<--config-profile>=I<s>
 
@@ -98,6 +100,14 @@ in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then reco
 
 You can also install L<App::BashCompletionProg> which makes it easy to add completion for Perinci::CmdLine-based scripts. After you install the module and put C<. ~/.bash-complete-prog> (or C<. /etc/bash-complete-prog>), you can just run C<bash-completion-prog> and the C<complete> command will be added to your C<~/.bash-completion-prog>. Your next shell session will then recognize tab completion for the command.
 
+=head2 fish
+
+To activate fish completion for this script, execute:
+
+ begin; set -lx COMP_SHELL fish; set -lx COMP_MODE gen_command; get-screensaver-timeout; end > $HOME/.config/fish/completions/get-screensaver-timeout.fish
+
+Or if you want to install globally, you can instead write the generated script to C</etc/fish/completions/get-screensaver-timeout.fish> or C</usr/share/fish/completions/get-screensaver-timeout.fish>. The exact path might be different on your system. Please check your C<fish_complete_path> variable.
+
 =head2 tcsh
 
 To activate tcsh completion for this script, put:
@@ -110,7 +120,7 @@ in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then reco
 
 To activate zsh completion for this script, put:
 
- _get_screensaver_timeout() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_LINE="$cl" COMP_POINT="$cp" get-screensaver-timeout`) }
+ _get_screensaver_timeout() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_SHELL=zsh COMP_LINE="$cl" COMP_POINT="$cp" get-screensaver-timeout`) }
 
  compctl -K _get_screensaver_timeout get-screensaver-timeout
 
