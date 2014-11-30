@@ -1,7 +1,7 @@
 package App::SetScreensaverTimeout;
 
 our $DATE = '2014-11-30'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
 use strict;
@@ -78,6 +78,13 @@ _
             schema => ['str*', match=>'\A\d+(?:\.\d+)?\s*(mins?|minutes?|h|hours?)?\z'],
             req => 1,
             pos => 0,
+            # XXX temporary, for testing. will be placed in
+            # Perinci::Sub::Complete eventually
+            completion => sub {
+                require Complete::Bash::History;
+                my %args = @_;
+                Complete::Bash::History::complete_cmdline_from_hist();
+            },
         },
     },
 };
@@ -146,7 +153,7 @@ App::SetScreensaverTimeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.04 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
+This document describes version 0.05 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
 
 =head1 FUNCTIONS
 

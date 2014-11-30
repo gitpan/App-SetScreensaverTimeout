@@ -23,6 +23,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "App::SetScreensaverTimeout",
   "PREREQ_PM" => {
+    "Complete::Bash::History" => 0,
     "Desktop::Detect" => 0,
     "File::Slurp::Tiny" => 0,
     "Perinci::CmdLine::Any" => "0.06",
@@ -35,7 +36,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.04",
+  "VERSION" => "0.05",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -43,6 +44,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "Complete::Bash::History" => 0,
   "Desktop::Detect" => 0,
   "File::Slurp::Tiny" => 0,
   "File::Spec" => 0,

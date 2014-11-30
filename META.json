@@ -29,6 +29,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Complete::Bash::History" : "0",
             "Desktop::Detect" : "0",
             "File::Slurp::Tiny" : "0",
             "Perinci::CmdLine::Any" : "0.06",
@@ -58,7 +59,7 @@
          "web" : "https://github.com/perlancar/perl-App-SetScreensaverTimeout"
       }
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018002"

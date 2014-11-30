@@ -4,7 +4,7 @@
 # and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
 
 our $DATE = '2014-11-30'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
 use strict;
@@ -31,7 +31,7 @@ set-screensaver-timeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.04 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
+This document describes version 0.05 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
 
 =head1 SYNOPSIS
 

@@ -17,6 +17,7 @@ meta-spec:
   version: '1.4'
 name: App-SetScreensaverTimeout
 requires:
+  Complete::Bash::History: '0'
   Desktop::Detect: '0'
   File::Slurp::Tiny: '0'
   Perinci::CmdLine::Any: '0.06'
@@ -27,7 +28,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=App-SetScreensaverTimeout
   homepage: https://metacpan.org/release/App-SetScreensaverTimeout
   repository: git://github.com/perlancar/perl-App-SetScreensaverTimeout.git
-version: '0.04'
+version: '0.05'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
