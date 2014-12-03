@@ -4,7 +4,7 @@
       "perlancar <perlancar@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520",
+   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141170",
    "license" : [
       "perl_5"
    ],
@@ -59,7 +59,7 @@
          "web" : "https://github.com/perlancar/perl-App-SetScreensaverTimeout"
       }
    },
-   "version" : "0.05",
+   "version" : "0.06",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018002"
@@ -247,7 +247,7 @@
                      {
                         "class" : "Pod::Weaver::Plugin::Rinci",
                         "name" : "@Author::PERLANCAR/Rinci",
-                        "version" : "0.19"
+                        "version" : "0.20"
                      },
                      {
                         "class" : "Pod::Weaver::Section::Leftovers",
@@ -349,7 +349,7 @@
                }
             },
             "name" : "@Author::PERLANCAR/Test::Compile",
-            "version" : "2.043"
+            "version" : "2.040"
          },
          {
             "class" : "Dist::Zilla::Plugin::Test::Rinci",

@@ -3,8 +3,8 @@
 # Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/set_screensaver_timeout
 # and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
 
-our $DATE = '2014-11-30'; # DATE
-our $VERSION = '0.05'; # VERSION
+our $DATE = '2014-12-03'; # DATE
+our $VERSION = '0.06'; # VERSION
 
 use 5.010001;
 use strict;
@@ -31,11 +31,13 @@ set-screensaver-timeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.05 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
+This document describes version 0.06 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-12-03.
 
 =head1 SYNOPSIS
 
- % set-screensaver-timeout [options] <timeout>
+Usage:
+
+ % set-screensaver-timeout [options] [timeout]
 
 =head1 DESCRIPTION
 
@@ -46,8 +48,6 @@ added in the future.
 =head1 OPTIONS
 
 C<*> marks required options.
-
-=head2 Common options
 
 =over
 
@@ -73,23 +73,35 @@ Show help message.
 
 Set output format to json.
 
+=item B<--naked-res>
+
+When outputing as JSON, strip result envelope.
+
+By default, when outputing as JSON, the full enveloped result is returned, e.g.:
+
+    [200,"OK",[1,2,3],{"func.extra"=>4}]
+
+The reason is so you can get the status (1st element), status message (2nd
+element) as well as result metadata/extra result (4th element) instead of just
+the result (3rd element). However, sometimes you want just the result, e.g. when
+you want to pipe the result for more post-processing:
+
+    [1,2,3]
+
+In this case, you can use `--naked-res`.
+
+
 =item B<--no-config>
 
 Do not use any configuration file.
 
+=item B<--timeout>=I<s>
+
+Value, default in minutes.
+
 =item B<--version>, B<-v>
 
 Show program version.
-
-=back
-
-=head2 Options
-
-=over
-
-=item B<--timeout>=I<s>*
-
-Value, default in minutes.
 
 =back
 

@@ -2,8 +2,8 @@ NAME
     App::SetScreensaverTimeout - Set screensaver timeout
 
 VERSION
-    This document describes version 0.05 of App::SetScreensaverTimeout (from
-    Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
+    This document describes version 0.06 of App::SetScreensaverTimeout (from
+    Perl distribution App-SetScreensaverTimeout), released on 2014-12-03.
 
 FUNCTIONS
   get_screensaver_timeout() -> [status, msg, result, meta]
@@ -36,7 +36,7 @@ FUNCTIONS
 
     Arguments ('*' denotes required arguments):
 
-    *   timeout* => *str*
+    *   timeout => *str*
 
         Value, default in minutes.
 

@@ -1,7 +1,7 @@
 package App::SetScreensaverTimeout;
 
-our $DATE = '2014-11-30'; # DATE
-our $VERSION = '0.05'; # VERSION
+our $DATE = '2014-12-03'; # DATE
+our $VERSION = '0.06'; # VERSION
 
 use 5.010001;
 use strict;
@@ -62,6 +62,8 @@ sub get_screensaver_timeout {
     [412, "Can't detect screensaver type"];
 }
 
+my $to_re = '\A\d+(?:\.\d+)?\s*(mins?|minutes?|h|hours?|seconds?|secs?|s)?\z';
+
 $SPEC{set_screensaver_timeout} = {
     v => 1.1,
     summary => 'Set screensaver timeout',
@@ -75,8 +77,7 @@ _
     args => {
         timeout => {
             summary => 'Value, default in minutes',
-            schema => ['str*', match=>'\A\d+(?:\.\d+)?\s*(mins?|minutes?|h|hours?)?\z'],
-            req => 1,
+            schema => ['str*', match=>$to_re],
             pos => 0,
             # XXX temporary, for testing. will be placed in
             # Perinci::Sub::Complete eventually
@@ -91,10 +92,19 @@ _
 sub set_screensaver_timeout {
     my %args = @_;
 
-    my ($mins) = $args{timeout} =~ /(\d+(?:\.\d+)?)/;
-    if ($args{timeout} =~ /h/) {
+    my $to = $args{timeout} or return get_screensaver_timeout();
+
+    $to =~ /$to_re/ or return [400, "Invalid timeout value, must match $to_re"];
+
+    my ($mins) = $to =~ /(\d+(?:\.\d+)?)/;
+    if ($to =~ /hour|h/) {
         $mins *= 60;
+    } elsif ($to =~ /minutes?|mins?/) {
+        # noop
+    } elsif ($to =~ /seconds?|secs?|s/) {
+        $mins /= 60;
     }
+
     # kde screen locker only accepts whole minutes
     $mins = int($mins);
     $mins = 1 if $mins < 1;
@@ -108,7 +118,7 @@ sub set_screensaver_timeout {
         $ct =~ s/^(Timeout\s*=\s*)(\S+)/${1}$secs/m
             or return [500, "Can't subtitute Timeout setting in $path"];
         write_file($path, $ct);
-        return [200];
+        return get_screensaver_timeout();
     }
 
     local $Proc::Find::CACHE = 1;
@@ -117,7 +127,7 @@ sub set_screensaver_timeout {
         system "gsettings", "set", "org.gnome.desktop.session", "idle-delay",
             $secs;
         return [500, "gsettings set failed: $!"] if $?;
-        return [200];
+        return get_screensaver_timeout();
     }
 
     if (proc_exists(name=>"xscreensaver")) {
@@ -132,7 +142,7 @@ sub set_screensaver_timeout {
         write_file($path, $ct);
         system "killall", "-HUP", "xscreensaver";
         $? == 0 or return [500, "Can't kill -HUP xscreensaver"];
-        return [200];
+        return get_screensaver_timeout();
     }
 
     [412, "Can't detect screensaver type"];
@@ -153,7 +163,7 @@ App::SetScreensaverTimeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.05 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-11-30.
+This document describes version 0.06 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-12-03.
 
 =head1 FUNCTIONS
 
@@ -193,7 +203,7 @@ Arguments ('*' denotes required arguments):
 
 =over 4
 
-=item * B<timeout>* => I<str>
+=item * B<timeout> => I<str>
 
 Value, default in minutes.
 
