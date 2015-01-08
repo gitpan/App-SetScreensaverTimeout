@@ -1,10 +1,10 @@
 #!perl
 
 # Note: This script is a CLI interface to Riap function /App/SetScreensaverTimeout/set_screensaver_timeout
-# and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.03
+# and generated automatically using Dist::Zilla::Plugin::Rinci::ScriptFromFunc version 0.05
 
-our $DATE = '2014-12-08'; # DATE
-our $VERSION = '0.07'; # VERSION
+our $DATE = '2015-01-08'; # DATE
+our $VERSION = '0.08'; # VERSION
 
 use 5.010001;
 use strict;
@@ -31,7 +31,7 @@ set-screensaver-timeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.07 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-12-08.
+This document describes version 0.08 of set-screensaver-timeout (from Perl distribution App-SetScreensaverTimeout), released on 2015-01-08.
 
 =head1 SYNOPSIS
 
@@ -82,30 +82,31 @@ C<*> marks required options.
 
 =item B<--config-path>=I<s>
 
-Set path to configuration file.
+{en_US Set path to configuration file}.
 
 Can be specified multiple times.
 
 =item B<--config-profile>=I<s>
 
-Set configuration profile to use.
+{en_US Set configuration profile to use}.
 
 =item B<--format>=I<s>
 
-Set output format.
+{en_US Choose output format, e.g. json, text}.
 
 =item B<--help>, B<-h>, B<-?>
 
-Show help message.
+{en_US Display this help message}.
 
 =item B<--json>
 
-Set output format to json.
+{en_US Set output format to json}.
 
 =item B<--naked-res>
 
-When outputing as JSON, strip result envelope.
+{en_US When outputing as JSON, strip result envelope}.
 
+{en_US 
 By default, when outputing as JSON, the full enveloped result is returned, e.g.:
 
     [200,"OK",[1,2,3],{"func.extra"=>4}]
@@ -113,24 +114,22 @@ By default, when outputing as JSON, the full enveloped result is returned, e.g.:
 The reason is so you can get the status (1st element), status message (2nd
 element) as well as result metadata/extra result (4th element) instead of just
 the result (3rd element). However, sometimes you want just the result, e.g. when
-you want to pipe the result for more post-processing:
+you want to pipe the result for more post-processing. In this case you can use
+`--naked-res` so you just get:
 
     [1,2,3]
-
-In this case, you can use `--naked-res`.
+}
 
 
 =item B<--no-config>
 
-Do not use any configuration file.
+{en_US Do not use any configuration file}.
 
 =item B<--timeout>=I<s>
 
-Value, default in minutes.
+{en_US Value, default in minutes}.
 
 =item B<--version>, B<-v>
-
-Show program version.
 
 =back
 
@@ -152,15 +151,7 @@ To activate bash completion for this script, put:
 
 in your bash startup (e.g. C<~/.bashrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
-You can also install L<App::BashCompletionProg> which makes it easy to add completion for Perinci::CmdLine-based scripts. After you install the module and put C<. ~/.bash-complete-prog> (or C<. /etc/bash-complete-prog>), you can just run C<bash-completion-prog> and the C<complete> command will be added to your C<~/.bash-completion-prog>. Your next shell session will then recognize tab completion for the command.
-
-=head2 fish
-
-To activate fish completion for this script, execute:
-
- begin; set -lx COMP_SHELL fish; set -lx COMP_MODE gen_command; set-screensaver-timeout; end > $HOME/.config/fish/completions/set-screensaver-timeout.fish
-
-Or if you want to install globally, you can instead write the generated script to C</etc/fish/completions/set-screensaver-timeout.fish> or C</usr/share/fish/completions/set-screensaver-timeout.fish>. The exact path might be different on your system. Please check your C<fish_complete_path> variable.
+It is recommended, however, that you install L<shcompgen> which allows you to activate completion scripts for several kinds of scripts on multiple shells. Some CPAN distributions (those that are built with L<Dist::Zilla::Plugin::GenShellCompletion>) will even automatically enable shell completion for their included scripts (using C<shcompgen>) at installation time, so you can immadiately have tab completion.
 
 =head2 tcsh
 
@@ -170,15 +161,11 @@ To activate tcsh completion for this script, put:
 
 in your tcsh startup (e.g. C<~/.tcshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
 
-=head2 zsh
+It is also recommended to install C<shcompgen> (see above).
 
-To activate zsh completion for this script, put:
+=head2 other shells
 
- _set_screensaver_timeout() { read -l; local cl="$REPLY"; read -ln; local cp="$REPLY"; reply=(`COMP_SHELL=zsh COMP_LINE="$cl" COMP_POINT="$cp" set-screensaver-timeout`) }
-
- compctl -K _set_screensaver_timeout set-screensaver-timeout
-
-in your zsh startup (e.g. C<~/.zshrc>). Your next shell session will then recognize tab completion for the command. Or, you can also directly execute the line above in your shell to activate immediately.
+For fish and zsh, install C<shcompgen> as described above.
 
 =head1 HOMEPAGE
 
@@ -202,7 +189,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

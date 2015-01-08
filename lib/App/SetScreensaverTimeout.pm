@@ -1,7 +1,7 @@
 package App::SetScreensaverTimeout;
 
-our $DATE = '2014-12-08'; # DATE
-our $VERSION = '0.07'; # VERSION
+our $DATE = '2015-01-08'; # DATE
+our $VERSION = '0.08'; # VERSION
 
 use 5.010001;
 use strict;
@@ -12,6 +12,11 @@ use File::Slurp::Tiny qw(read_file write_file);
 use Proc::Find qw(proc_exists);
 
 our %SPEC;
+
+$SPEC{':package'} = {
+    v => 1.1,
+    summary => 'Set screensaver timeout',
+};
 
 sub _get_or_set {
     my ($which, $mins) = @_;
@@ -30,7 +35,11 @@ sub _get_or_set {
         return [500, "gsettings get failed: $!"] if $?;
         $res =~ /^uint32\s+(\d+)$/
             or return [500, "Can't parse gsettings get output"];
-        return [200, "OK", $1/60, {'func.screensaver'=>'gnome-screensaver'}];
+        my $val = $1/60;
+        return [200, "OK", ($which eq 'set' ? undef : $val), {
+            'func.timeout' => $val,
+            'func.screensaver'=>'gnome-screensaver',
+        }];
     }
 
     if (proc_exists(name=>"xscreensaver")) {
@@ -49,8 +58,11 @@ sub _get_or_set {
         }
         $ct =~ /^timeout:\s*(\d+):(\d+):(\d+)\s*$/m
             or return [500, "Can't get timeout setting in $path"];
-        return [200, "OK", ($1*3600+$2*60+$3)/60,
-                {'func.screensaver'=>'xscreensaver'}];
+        my $val = ($1*3600+$2*60+$3)/60;
+        return [200, "OK", ($which eq 'set' ? undef : $val), {
+            'func.timeout' => $val,
+            'func.screensaver' => 'xscreensaver',
+        }];
     }
 
     if ($detres->{desktop} eq 'kde-plasma') {
@@ -64,7 +76,11 @@ sub _get_or_set {
         }
         $ct =~ /^Timeout\s*=\s*(\d+)\s*$/m
             or return [500, "Can't get Timeout setting in $path"];
-        return [200, "OK", $1/60, {'func.screensaver'=>'kde-plasma'}];
+        my $val = $1/60;
+        return [200, "OK", ($which eq 'set' ? undef : $val), {
+            'func.timeout' => $val,
+            'func.screensaver'=>'kde-plasma',
+        }];
     }
 
     [412, "Can't detect screensaver type"];
@@ -178,21 +194,21 @@ App::SetScreensaverTimeout - Set screensaver timeout
 
 =head1 VERSION
 
-This document describes version 0.07 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2014-12-08.
+This document describes version 0.08 of App::SetScreensaverTimeout (from Perl distribution App-SetScreensaverTimeout), released on 2015-01-08.
 
 =head1 FUNCTIONS
 
 
 =head2 get_screensaver_timeout() -> [status, msg, result, meta]
 
-Get screensaver timeout (in minutes).
+{en_US Get screensaver timeout (in minutes)}.
 
+{en_US 
 Provide a common way to get screensaver timeout setting. Support several screen
 savers (see C<set_screensaver_timeout>).
+}
 
 No arguments.
-
-Return value:
 
 Returns an enveloped result (an array).
 
@@ -203,13 +219,14 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
-Timeout value, in minutes (float)
+Return value: {en_US Timeout value, in minutes} (float)
 
 
 =head2 set_screensaver_timeout(%args) -> [status, msg, result, meta]
 
-Set screensaver timeout.
+{en_US Set screensaver timeout}.
 
+{en_US 
 Provide a common way to quickly set screensaver timeout. Will detect the running
 screensaver/desktop environment and set accordingly. Supports xscreensaver,
 gnome-screensaver, and KDE screen locker. Support for other screensavers will be
@@ -240,6 +257,7 @@ C<~/.kde/share/config/kscreensaverrc>:
   Timeout=300
 
 modifies the line, save the file.
+}
 
 =back
 
@@ -249,11 +267,9 @@ Arguments ('*' denotes required arguments):
 
 =item * B<timeout> => I<str>
 
-Value, default in minutes.
+{en_US Value, default in minutes}.
 
 =back
-
-Return value:
 
 Returns an enveloped result (an array).
 
@@ -264,7 +280,7 @@ First element (status) is an integer containing HTTP status code
 element (meta) is called result metadata and is optional, a hash
 that contains extra information.
 
- (any)
+Return value:  (any)
 
 =head1 KNOWN BUGS
 
@@ -302,7 +318,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
